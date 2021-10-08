@@ -9,6 +9,8 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private float speed = 100f;
     [SerializeField] private MovementType movementType;
 
+    Vector2 keyboardInputAxis;
+
     private void Start()
     {
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -17,6 +19,19 @@ public class BallMovement : MonoBehaviour
         {
             Vector2 ballDirection = GetRandomDirection();
             MoveBall(ballDirection);
+        }
+    }
+
+    private void Update()
+    {
+        keyboardInputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+    }
+
+    private void FixedUpdate()
+    {
+        if(movementType == MovementType.KEYBOARD_CONTROLLED)
+        {
+            MoveBall(keyboardInputAxis);
         }
     }
 
