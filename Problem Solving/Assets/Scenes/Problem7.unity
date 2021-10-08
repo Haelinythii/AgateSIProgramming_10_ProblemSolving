@@ -606,6 +606,8 @@ MonoBehaviour:
   squarePrefab: {fileID: 4235297878282238314, guid: 6d6c59fa7b8f1354cb399ae295d53d31,
     type: 3}
   maxSquareCount: 5
+  minSquareScale: {x: 2, y: 2}
+  maxSquareScale: {x: 10, y: 10}
 --- !u!1 &1256239862
 GameObject:
   m_ObjectHideFlags: 0
