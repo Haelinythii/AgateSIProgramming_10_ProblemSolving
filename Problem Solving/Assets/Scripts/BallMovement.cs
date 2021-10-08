@@ -10,6 +10,7 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private MovementType movementType;
 
     Vector2 keyboardInputAxis;
+    Vector2 ballToMouseDirection;
 
     private void Start()
     {
@@ -24,7 +25,24 @@ public class BallMovement : MonoBehaviour
 
     private void Update()
     {
+        //get keyboard axis for keyboard controlled movement
         keyboardInputAxis = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+
+        if(movementType == MovementType.MOUSE_CONTROLLED)
+        {
+            //get mouse position and ball direction to mouse
+            Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            //if the ball is too close from mouse, stop it to avoid jitter
+            if (Vector2.Distance(mousePositionInWorld, transform.position) < 0.1f)
+            {
+                ballToMouseDirection = Vector2.zero;
+            }
+            else
+            {
+                ballToMouseDirection = ((Vector2)(mousePositionInWorld - transform.position)).normalized;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -32,6 +50,10 @@ public class BallMovement : MonoBehaviour
         if(movementType == MovementType.KEYBOARD_CONTROLLED)
         {
             MoveBall(keyboardInputAxis);
+        }
+        else if(movementType == MovementType.MOUSE_CONTROLLED)
+        {
+            MoveBall(ballToMouseDirection);
         }
     }
 
