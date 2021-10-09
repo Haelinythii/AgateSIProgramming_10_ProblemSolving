@@ -10,9 +10,18 @@ public class SpiderWeb : MonoBehaviour
 
     private float onScreenTimer, warningTimer;
     private bool canExpand = false;
+    private Collider2D webCollider;
 
-    private void Start()
+    private void Awake()
     {
+        webCollider = GetComponentInChildren<Collider2D>();
+    }
+
+    private void OnEnable()
+    {
+        //reset for next use
+        warning.transform.localScale = Vector2.zero;
+        webCollider.enabled = false;
         warning.SetActive(true);
 
         StartCoroutine(ExpandOrShrink(warning.transform, maxSize, timeOnWarning, () => {
@@ -24,11 +33,13 @@ public class SpiderWeb : MonoBehaviour
     private void ProcessExpandWeb()
     {
         StartCoroutine(ExpandOrShrink(web.transform, maxSize, timeOnScreen, ProcessShrinkWeb));
+        webCollider.enabled = true;
     }
 
     private void ProcessShrinkWeb()
     {
-        StartCoroutine(ExpandOrShrink(web.transform, Vector2.zero, timeOnScreen, null));
+        StartCoroutine(ExpandOrShrink(web.transform, Vector2.zero, timeOnScreen / 2f, () => gameObject.SetActive(false)));
+        webCollider.enabled = false;
     }
 
     private IEnumerator ExpandOrShrink(Transform _object, Vector2 targetSize, float time, System.Action OnCompleted)

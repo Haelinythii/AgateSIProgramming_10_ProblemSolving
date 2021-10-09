@@ -117,6 +117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 200
   missileRigidbody: {fileID: 5663792522625103017}
+  timeToDestroyMissile: 6
 --- !u!61 &5663792522625103022
 BoxCollider2D:
   m_ObjectHideFlags: 0

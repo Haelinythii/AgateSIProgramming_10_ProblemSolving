@@ -2,27 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SquareSpawner : MonoBehaviour
+public class SquareSpawner : Spawner
 {
     [SerializeField] private GameObject squarePrefab;
     [SerializeField] private int maxSquareCount = 5;
-    private Collider2D spawnCollider;
-
-    private Vector2 maxSpawningPosition;
-    private Vector2 minSpawningPosition;
 
     [SerializeField] private Vector2 minSquareScale;
     [SerializeField] private Vector2 maxSquareScale;
 
     public bool SquareCanRespawn;
 
-    private void Start()
+    protected override void Start()
     {
-        spawnCollider = GetComponent<Collider2D>();
-
-        //get max & min spawning position from collider bounds
-        maxSpawningPosition = spawnCollider.bounds.max;
-        minSpawningPosition = spawnCollider.bounds.min;
+        base.Start();
 
         SpawnSquares();
     }
@@ -64,13 +56,5 @@ public class SquareSpawner : MonoBehaviour
     private void SetRandomSquarePosition(GameObject squareGO)
     {
         squareGO.transform.position = GetRandomSpawnPosition();
-    }
-
-    private Vector2 GetRandomSpawnPosition()
-    {
-        //randomize position from min & max spawning position
-        float randomX = Random.Range(minSpawningPosition.x, maxSpawningPosition.x);
-        float randomY = Random.Range(minSpawningPosition.y, maxSpawningPosition.y);
-        return new Vector2(randomX, randomY);
     }
 }

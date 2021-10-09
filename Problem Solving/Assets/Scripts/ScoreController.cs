@@ -21,13 +21,32 @@ public class ScoreController : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private Text scoreText;
-    private int score = 0;
+    private const string HIGHSCORE_KEY = "Hiscore";
+
+    [SerializeField] private Text scoreText, highScoreText;
+    private int score = 0, highscore = 0;
+
+    private void Start()
+    {
+        SetHighscore();
+    }
+
+    public void SetHighscore()
+    {
+        highscore = Mathf.Max(score, PlayerPrefs.GetInt(HIGHSCORE_KEY));
+        PlayerPrefs.SetInt(HIGHSCORE_KEY, highscore);
+        highScoreText.text = "Highscore: " + highscore.ToString();
+    }
 
     public void IncreaseScore(int scoreCount)
     {
         //increase score and update score text
         score += scoreCount;
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 }

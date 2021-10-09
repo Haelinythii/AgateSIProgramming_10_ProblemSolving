@@ -20,8 +20,13 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] private GameObject gameoverPanel;
+
     public void GameOver()
     {
+        ScoreController.Instance.SetHighscore();
+        gameoverPanel.SetActive(true);
         Debug.Log("kalah");
+        Time.timeScale = 0f;
     }
 }

@@ -6,20 +6,27 @@ using UnityEngine;
 public class Missile : MonoBehaviour
 {
     [SerializeField] private float speed = 100f;
-    [SerializeField] private Rigidbody2D missileRigidbody;
+    [SerializeField] private float timeToDestroyMissile = 5f;
 
+    private Rigidbody2D missileRigidbody;
     Vector2 missileMoveDirection;
     Transform target;
 
-    private void Start()
+    private void OnEnable()
     {
+        SetMissileDirectionAndRotation();
+        StartCoroutine(DelayDisablingMissile());
+    }
+
+    private void Awake()
+    {
+        missileRigidbody = GetComponent<Rigidbody2D>();
         SetMissileTarget(GameObject.FindGameObjectWithTag("Player").transform);
     }
 
     public void SetMissileTarget(Transform _target)
     {
         target = _target;
-        SetMissileDirectionAndRotation();
     }
 
     private void SetMissileDirectionAndRotation()
@@ -39,5 +46,11 @@ public class Missile : MonoBehaviour
     private void MoveMissile()
     {
         missileRigidbody.velocity = missileMoveDirection * speed * Time.fixedDeltaTime;
+    }
+
+    private IEnumerator DelayDisablingMissile()
+    {
+        yield return new WaitForSeconds(timeToDestroyMissile);
+        gameObject.SetActive(false);
     }
 }
