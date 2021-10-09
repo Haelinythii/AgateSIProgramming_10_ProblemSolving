@@ -825,7 +825,7 @@ MonoBehaviour:
   squarePrefab: {fileID: 4235297878282238314, guid: 6d6c59fa7b8f1354cb399ae295d53d31,
     type: 3}
   maxSquareCount: 10
-  minSquareScale: {x: 2, y: 2}
+  minSquareScale: {x: 3, y: 3}
   maxSquareScale: {x: 10, y: 10}
   SquareCanRespawn: 1
 --- !u!114 &941008311
@@ -840,11 +840,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bd863ee50eaec84ca5744bac4ea398b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnDelay: 1
+  spawnDelay: 6
   obstaclesPrefabs:
   - {fileID: 5663792522625103013, guid: 0783e2bd9e170df4ead6da896dce7f76, type: 3}
+  - {fileID: 6375092276303182508, guid: 31f9b1ee17a2b534cba82251609503b3, type: 3}
+  - {fileID: 284940296544417114, guid: 4ee1a36d92163ac43ac733a0ef0f77cd, type: 3}
   edgesCollider: {fileID: 337034504}
-  difficultyIncrementScore: 5
+  difficultyIncrementScore: 20
 --- !u!1 &1256239862
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,7 +1217,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1656394170}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0

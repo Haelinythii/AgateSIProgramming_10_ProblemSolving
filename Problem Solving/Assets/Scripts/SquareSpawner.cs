@@ -22,7 +22,7 @@ public class SquareSpawner : Spawner
     private void SpawnSquares()
     {
         //randomize spawned square count
-        float squareSpawnCount = Random.Range(1, maxSquareCount + 1);
+        float squareSpawnCount = Random.Range(5, maxSquareCount + 1);
         for (int i = 0; i < squareSpawnCount; i++)
         {
             //create new square

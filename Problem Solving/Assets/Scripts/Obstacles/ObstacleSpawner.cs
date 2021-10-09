@@ -50,13 +50,14 @@ public class ObstacleSpawner : Spawner
 
     private GameObject GetOrCreateObstacle()
     {
+        int randomObstacleIndex = Random.Range(0, obstaclesPrefabs.Length);
+
         //get obstacle from pool
-        GameObject obstacle = spawnedObstacles.Find(o => !o.activeSelf);
+        GameObject obstacle = spawnedObstacles.Find(o => !o.activeSelf && o.name.Contains(obstaclesPrefabs[randomObstacleIndex].name));
 
         //if there is none available, create it
         if(obstacle == null)
         {
-            int randomObstacleIndex = Random.Range(0, obstaclesPrefabs.Length);
             obstacle = Instantiate(obstaclesPrefabs[randomObstacleIndex]);
             spawnedObstacles.Add(obstacle);
         }
