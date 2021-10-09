@@ -11,6 +11,8 @@ public class SquareController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            if (ScoreController.Instance == null) return;
+
             ScoreController.Instance.IncreaseScore(1);
             OnSquareDestroyed(this);
             gameObject.SetActive(false);
