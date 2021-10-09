@@ -15,9 +15,11 @@ public class SquareSpawner : MonoBehaviour
     [SerializeField] private Vector2 maxSquareScale;
 
     public bool SquareCanRespawn;
+    private Transform player;
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         spawnCollider = GetComponent<Collider2D>();
 
         //get max & min spawning position from collider bounds
@@ -63,7 +65,19 @@ public class SquareSpawner : MonoBehaviour
 
     private void SetRandomSquarePosition(GameObject squareGO)
     {
-        squareGO.transform.position = GetRandomSpawnPosition();
+        Vector2 randomSquarePosition = GetRandomSpawnPosition();
+
+        float playerRadius = player.GetComponent<SpriteRenderer>().bounds.size.x / 2f;
+        SpriteRenderer squareRenderer = squareGO.GetComponent<SpriteRenderer>();
+        float squareDiagonal = Mathf.Sqrt(Mathf.Pow(squareRenderer.bounds.extents.x, 2) + Mathf.Pow(squareRenderer.bounds.extents.y, 2));
+
+        while (Vector2.Distance(player.position, randomSquarePosition) < playerRadius + squareDiagonal)
+        {
+            Debug.Log(Vector2.Distance(player.position, randomSquarePosition));
+            randomSquarePosition = GetRandomSpawnPosition();
+        }
+
+        squareGO.transform.position = randomSquarePosition;
     }
 
     private Vector2 GetRandomSpawnPosition()
