@@ -33,6 +33,8 @@ public class ScoreController : MonoBehaviour
 
     public void SetHighscore()
     {
+        if (highScoreText == null) return;
+
         highscore = Mathf.Max(score, PlayerPrefs.GetInt(HIGHSCORE_KEY));
         PlayerPrefs.SetInt(HIGHSCORE_KEY, highscore);
         highScoreText.text = "Highscore: " + highscore.ToString();

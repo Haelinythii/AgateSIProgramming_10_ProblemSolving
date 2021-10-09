@@ -17,6 +17,7 @@ public class SquareSpawner : Spawner
     {
         base.Start();
 
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         SpawnSquares();
     }
 
