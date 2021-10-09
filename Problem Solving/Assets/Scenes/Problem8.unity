@@ -725,7 +725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squarePrefab: {fileID: 4235297878282238314, guid: 6d6c59fa7b8f1354cb399ae295d53d31,
     type: 3}
-  maxSquareCount: 5
+  maxSquareCount: 10
   minSquareScale: {x: 2, y: 2}
   maxSquareScale: {x: 10, y: 10}
   SquareCanRespawn: 1
